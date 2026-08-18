@@ -1,32 +1,32 @@
-const pool = require('../config/database')
+const pool = require("../config/database");
 
 const obtenerTodos = async () => {
-  const [productos] = await pool.query("SELECT * FROM productos")
+  const [productos] = await pool.query("SELECT * FROM productos");
 
-  return productos
-}
+  return productos;
+};
 
 const obtenerPorId = async (id) => {
   const [productos] = await pool.query(
     "SELECT * FROM productos WHERE id = ?",
     [id],
-  )
+  );
 
-  return productos[0]
-}
+  return productos[0];
+};
 
 const crear = async (producto) => {
   const { nombre, descripcion, precio, stock, categoria } = producto;
 
   const [resultado] = await pool.query(
-    `INSERT INTO productos 
+    `INSERT INTO productos
     (nombre, descripcion, precio, stock, categoria)
     VALUES (?, ?, ?, ?, ?)`,
     [nombre, descripcion, precio, stock, categoria],
-  )
+  );
 
   return resultado;
-}
+};
 
 const actualizar = async (id, producto) => {
   const { nombre, descripcion, precio, stock, categoria } = producto;
@@ -36,19 +36,19 @@ const actualizar = async (id, producto) => {
     SET nombre = ?, descripcion = ?, precio = ?, stock = ?, categoria = ?
     WHERE id = ?`,
     [nombre, descripcion, precio, stock, categoria, id],
-  )
+  );
 
   return resultado;
-}
+};
 
 const eliminar = async (id) => {
   const [resultado] = await pool.query(
-    'DELETE FROM productos WHERE id = ?',
+    "DELETE FROM productos WHERE id = ?",
     [id],
-  )
+  );
 
   return resultado;
-}
+};
 
 module.exports = {
   obtenerTodos,
@@ -56,4 +56,4 @@ module.exports = {
   crear,
   actualizar,
   eliminar,
-}
+};

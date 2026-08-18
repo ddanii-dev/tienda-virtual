@@ -11,16 +11,18 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// Middleware para recibir JSON
+// Middleware para recibir datos en formato JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Ruta principal
 app.get("/", (req, res) => {
   res.json({
     mensaje: "Tienda virtual funcionando",
   });
 });
 
+// Rutas de productos
 app.use("/api/productos", productoRoutes);
 
 app.listen(PORT, () => {

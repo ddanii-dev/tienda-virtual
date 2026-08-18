@@ -1,45 +1,43 @@
-const productoModel = require('../models/productoModel')
+const productoModel = require("../models/productoModel");
 
 const obtenerProductos = async (req, res) => {
   try {
-    const productos = await productoModel.obtenerTodos()
+    const productos = await productoModel.obtenerTodos();
 
     res.status(200).json(productos);
   } catch (error) {
-    console.error(error)
+    console.error(error);
 
     res.status(500).json({
-      mensaje: 'Error al obtener los productos',
-    })
+      mensaje: "Error al obtener los productos",
+    });
   }
-}
+};
 
 const obtenerProducto = async (req, res) => {
   try {
-    const { id } = req.params
+    const { id } = req.params;
 
-    const producto = await productoModel.obtenerPorId(id)
+    const producto = await productoModel.obtenerPorId(id);
 
     if (!producto) {
       return res.status(404).json({
-        mensaje: 'Producto no encontrado',
-      })
+        mensaje: "Producto no encontrado",
+      });
     }
 
-    res.status(200).json(producto)
+    res.status(200).json(producto);
   } catch (error) {
-    console.error(error)
+    console.error(error);
 
     res.status(500).json({
-      mensaje: 'Error al obtener el producto',
-    })
+      mensaje: "Error al obtener el producto",
+    });
   }
-}
+};
 
 const crearProducto = async (req, res) => {
   try {
-    console.log("Datos recibidos:", req.body);
-
     const { nombre, descripcion, precio, stock, categoria } = req.body;
 
     if (!nombre || !precio || !stock || !categoria) {
@@ -73,52 +71,52 @@ const crearProducto = async (req, res) => {
 
 const actualizarProducto = async (req, res) => {
   try {
-    const { id } = req.params
-    const producto = req.body
+    const { id } = req.params;
+    const producto = req.body;
 
-    const resultado = await productoModel.actualizar(id, producto)
+    const resultado = await productoModel.actualizar(id, producto);
 
     if (resultado.affectedRows === 0) {
       return res.status(404).json({
-        mensaje: 'Producto no encontrado',
-      })
+        mensaje: "Producto no encontrado",
+      });
     }
 
     res.status(200).json({
-      mensaje: 'Producto actualizado correctamente',
-    })
+      mensaje: "Producto actualizado correctamente",
+    });
   } catch (error) {
-    console.error(error)
+    console.error(error);
 
     res.status(500).json({
-      mensaje: 'Error al actualizar el producto',
-    })
+      mensaje: "Error al actualizar el producto",
+    });
   }
-}
+};
 
 const eliminarProducto = async (req, res) => {
   try {
-    const { id } = req.params
+    const { id } = req.params;
 
-    const resultado = await productoModel.eliminar(id)
+    const resultado = await productoModel.eliminar(id);
 
     if (resultado.affectedRows === 0) {
       return res.status(404).json({
-        mensaje: 'Producto no encontrado',
-      })
+        mensaje: "Producto no encontrado",
+      });
     }
 
     res.status(200).json({
-      mensaje: 'Producto eliminado correctamente',
-    })
+      mensaje: "Producto eliminado correctamente",
+    });
   } catch (error) {
-    console.error(error)
+    console.error(error);
 
     res.status(500).json({
-      mensaje: 'Error al eliminar el producto',
-    })
+      mensaje: "Error al eliminar el producto",
+    });
   }
-}
+};
 
 module.exports = {
   obtenerProductos,
@@ -126,4 +124,4 @@ module.exports = {
   crearProducto,
   actualizarProducto,
   eliminarProducto,
-}
+};
