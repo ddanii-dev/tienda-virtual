@@ -1,0 +1,20 @@
+{
+  "name": "tienda-virtual",
+  "version": "1.0.0",
+  "description": "API REST para una tienda virtual",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "author": "Daniel Felipe Lopez Serrano",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "17.4.2",
+    "express": "5.2.1",
+    "mysql2": "3.23.3"
+  },
+  "devDependencies": {
+    "nodemon": "3.1.14"
+  }
+}
